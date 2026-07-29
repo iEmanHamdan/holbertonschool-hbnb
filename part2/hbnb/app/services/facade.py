@@ -36,9 +36,20 @@ class HBnBFacade:
     def get_user_by_email(self, email):
         return self.user_repo.get_by_attribute('email', email)
 
+    """We update this part to reject any invalid email form like  @mlsdc.com or ldsef@dlc or scdsc@ etc..."""
     def update_user(self, user_id, user_data):
+        user = self.user_repo.get(user_id)
+
+        if not user:
+            return None
+
+        if "email" in user_data:
+            user_data["email"] = User.validate_email(
+                user_data["email"]
+            )
+
         self.user_repo.update(user_id, user_data)
-        return self.user_repo.get(user_id)
+        return user
 
     # --- AMENITY OPERATIONS ---
     def create_amenity(self, amenity_data):

@@ -100,3 +100,10 @@ def add_review(self, review):
                 for review in self.reviews
             ]
         }
+
+        """
+        - Attribute Definitions and Validation in Place Class: Place has required attributes and range checks for coordinates and price, but owner existence validation is not enforced
+
+
+
+        """

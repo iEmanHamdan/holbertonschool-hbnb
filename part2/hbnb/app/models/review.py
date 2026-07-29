@@ -33,3 +33,8 @@ def validate_review_data(text, rating):
                 "user_id": self.user_id,
                 "place_id": self.place_id
             }
+
+
+        """- Attribute Definitions and Validation in Review Class: Review validates text and rating, but does not verify that place and user exist.
+
+        """
