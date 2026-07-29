@@ -3,16 +3,8 @@ from app.models.basemodel import BaseModel
 class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
         super().__init__()
+        self.validate_place_data(title, price, latitude, longitude)
         
-        if not title or len(title.strip()) == 0:
-            raise ValueError("Title cannot be empty")
-        if price < 0:
-            raise ValueError("Price must be a positive value")
-        if not (-90.0 <= latitude <= 90.0):
-            raise ValueError("Latitude must be between -90.0 and 90.0")
-        if not (-180.0 <= longitude <= 180.0):
-            raise ValueError("Longitude must be between -180.0 and 180.0")
-            
         self.title = title
         self.description = description
         self.price = float(price)
@@ -22,6 +14,30 @@ class Place(BaseModel):
         self._owner = None
         self.reviews = []
         self.amenities = []
+
+        @staticmethod
+        def validate_place_data(title, price, latitude, longitude):
+            if not title or len(title.strip()) == 0: raise ValueError("Title cannot be empty")
+        if float(price) < 0: raise ValueError("Price must be a positive value")
+        if not (-90.0 <= float(latitude) <= 90.0): raise ValueError("Latitude must be between -90.0 and 90.0")
+        if not (-180.0 <= float(longitude) <= 180.0): raise ValueError("Longitude must be between -180.0 and 180.0")
+
+def update(self, data):
+    title = data.get("title", self.title)
+    price = data.get("price", self.price)
+    latitude = data.get("latitude", self.latitude)
+    longitude = data.get("longitude", self.longitude)
+
+    self.validate_place_data(title, price, latitude, longitude)
+    super().update(data)
+
+def add_review(self, review):
+    """Add a review to the place."""
+    self.reviews.append(review)
+
+    def add_amenity(self, amenity):
+        """Add an amenity to the place."""
+        self.amenities.append(amenity)
 
     @property
     def owner(self):
