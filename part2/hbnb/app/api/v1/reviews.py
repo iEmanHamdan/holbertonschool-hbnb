@@ -1,4 +1,4 @@
-"""Review API endpoints."""
+"""Review API endpoints"""
 
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
@@ -20,11 +20,11 @@ review_update_model = api.model("ReviewUpdate", {
 
 @api.route("/")
 class ReviewList(Resource):
-    """Resource for review list operations."""
+    """Resource for review list operations"""
 
     @api.response(200, "Reviews successfully retrieved")
     def get(self):
-        """Retrieve all reviews."""
+        """Retrieve all reviews"""
         reviews = facade.get_all_reviews()
         return [review.to_dict() for review in reviews], 200
 
@@ -32,7 +32,7 @@ class ReviewList(Resource):
     @api.response(201, "Review successfully created")
     @api.response(400, "Invalid input data")
     def post(self):
-        """Create a new review."""
+        """Create a new review"""
         review_data = api.payload
         try:
             new_review = facade.create_review(review_data)
@@ -43,12 +43,12 @@ class ReviewList(Resource):
 @api.route("/<string:review_id>")
 @api.param("review_id", "The unique identifier of the review")
 class ReviewResource(Resource):
-    """Resource for individual review operations."""
+    """Resource for individual review operations"""
 
     @api.response(200, "Review successfully retrieved")
     @api.response(404, "Review not found")
     def get(self, review_id):
-        """Retrieve a review by ID."""
+        """Retrieve a review by ID"""
         review = facade.get_review(review_id)
         if not review:
             return {"error": "Review not found"}, 404
@@ -59,7 +59,7 @@ class ReviewResource(Resource):
     @api.response(400, "Invalid input data")
     @api.response(404, "Review not found")
     def put(self, review_id):
-        """Update an existing review."""
+        """Update an existing review"""
         review_data = api.payload
         if not review_data:
             return {"error": "No update data provided"}, 400
@@ -68,15 +68,34 @@ class ReviewResource(Resource):
         except (ValueError, TypeError) as error:
             return {"error": str(error)}, 400
         
-        if updated_review is None:
+        if not updated_review:
             return {"error": "Review not found"}, 404
-        return {"message": "Review updated successfully"}, 200  
+        
+        return updated_review.to_dict(), 200  
 
     @api.response(200, "Review successfully deleted")
     @api.response(404, "Review not found")
     def delete(self, review_id):
-        """Delete an existing review."""
+        """Delete an existing review"""
         deleted = facade.delete_review(review_id)
         if not deleted:
             return {"error": "Review not found"}, 404
         return {"message": "Review deleted successfully"}, 200
+
+@api.route("/<string:place_id>/reviews")
+@api.param("place_id", "The unique identifier of the place")
+class PlaceReviewList(Resource):
+    """Resource for retrieving reviews of a specific place"""
+
+    @api.response(200, "Reviews successfully retrieved")
+    @api.response(404, "Place not found")
+    def get(self, place_id):
+        """Retrieve all reviews associated with a specific place"""
+
+        reviews = facade.get_reviews_by_place(place_id)
+
+        if reviews is None:
+            return {"error": "Place not found"}, 404
+
+        return [review.to_dict()
+                for review in reviews], 200
