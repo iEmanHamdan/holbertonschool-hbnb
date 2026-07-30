@@ -4,7 +4,7 @@ class Place(BaseModel):
     def __init__(self, title, description, price, latitude, longitude, owner_id):
         super().__init__()
         self.validate_place_data(title, price, latitude, longitude)
-        
+
         self.title = title
         self.description = description
         self.price = float(price)
@@ -14,8 +14,8 @@ class Place(BaseModel):
         self._owner = None
         self.reviews = []
         self.amenities = []
-
-        @staticmethod
+    
+        @staticmethod 
         def validate_place_data(title, price, latitude, longitude):
             if not title or len(title.strip()) == 0: raise ValueError("Title cannot be empty")
         if float(price) < 0: raise ValueError("Price must be a positive value")
