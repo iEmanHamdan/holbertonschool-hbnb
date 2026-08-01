@@ -1,3 +1,5 @@
+import email
+
 from app.persistence.repository import InMemoryRepository
 from app.models.user import User
 from app.models.amenity import Amenity
@@ -6,24 +8,27 @@ from app.models.review import Review
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = InMemoryRepository()
+        self.user_repo = InMemoryRepository()  # this will be replaced
         self.place_repo = InMemoryRepository()
         self.review_repo = InMemoryRepository()
         self.amenity_repo = InMemoryRepository()
 
     # --- USER OPERATIONS ---
+    
     def create_user(self, user_data):
         clean_data = {
             'first_name': user_data.get('first_name'),
             'last_name': user_data.get('last_name'),
-            'email': user_data.get('email')
+            'email': user_data.get('email'),
+            'password': user_data.get('password')
         }
         
         user = User(**clean_data)
-        
-        if 'User_Rule' in user_data:
-            user.user_rule = user_data['User_Rule']
-            
+        existing_user = self.get_user_by_email(user.email)
+
+        if existing_user:
+            raise ValueError("Email already registered")
+       
         self.user_repo.add(user)
         return user
 
@@ -34,8 +39,13 @@ class HBnBFacade:
         return self.user_repo.get_all()
 
     def get_user_by_email(self, email):
+        
+        if not isinstance(email, str):
+            return None
+        
         return self.user_repo.get_by_attribute('email', email)
 
+        
     """We update this part to reject any invalid email form like  @mlsdc.com or ldsef@dlc or scdsc@ etc..."""
     def update_user(self, user_id, user_data):
         user = self.user_repo.get(user_id)
@@ -43,13 +53,24 @@ class HBnBFacade:
         if not user:
             return None
 
-        if "email" in user_data:
-            user_data["email"] = User.validate_email(
-                user_data["email"]
-            )
+        allowed_fields = {"first_name", "last_name", "email"}
+        clean_data = {key: value for key, value in user_data.items()
+                    if key in allowed_fields}
 
-        self.user_repo.update(user_id, user_data)
-        return user
+        if "email" in clean_data:
+            new_email = clean_data["email"] 
+
+            if isinstance(new_email, str):
+                new_email = new_email
+                clean_data["email"] = new_email
+
+            existing_user = self.get_user_by_email(new_email)
+
+            if existing_user and existing_user.id != user_id:
+                raise ValueError("Email already registered")
+
+        self.user_repo.update(user_id, clean_data)
+        return self.user_repo.get(user_id)
 
     # --- AMENITY OPERATIONS ---
     def create_amenity(self, amenity_data):
