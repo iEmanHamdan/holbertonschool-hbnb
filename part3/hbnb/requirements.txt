@@ -5,3 +5,4 @@ jsonschema==4.21.1
 pytest==8.0.2
 Flask-Bcrypt==1.0.1
 flask-bcrypt
+flask-jwt-extended
