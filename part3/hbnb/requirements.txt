@@ -6,3 +6,5 @@ pytest==8.0.2
 Flask-Bcrypt==1.0.1
 flask-bcrypt
 flask-jwt-extended
+sqlalchemy
+flask-sqlalchemy

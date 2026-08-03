@@ -2,6 +2,7 @@
 
 from flask_restx import Namespace, Resource, fields
 from app.services import facade
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 
 api = Namespace("places", description="Place operations")
 
@@ -59,12 +60,16 @@ class PlaceList(Resource):
     @api.expect(place_model, validate=True)
     @api.response(201, "Place successfully created")
     @api.response(400, "Invalid input data")
+    @api.response(401, "Unauthorized")
+    @jwt_required()
     def post(self):
         """Create a new place"""
-        place_data = api.payload 
+        current_user = get_jwt_identity()
+        place_data = api.payload
+        place_data['owner_id'] = current_user
+
         try:
             new_place = facade.create_place(place_data)
-
         except (ValueError, TypeError) as error:
             return {"error": str(error)}, 400
 
@@ -95,23 +100,29 @@ class PlaceResource(Resource):
     @api.expect(place_Update_model, validate=True)
     @api.response(200, "Place successfully updated")
     @api.response(400, "Invalid input data")
+    @api.response(403, "Unauthorized action")
     @api.response(404, "Place not found")
+    @jwt_required()
     def put(self, place_id):
         """Update an existing place."""
-        place_data = api.payload 
+        current_user = get_jwt_identity()
+        claims = get_jwt()
+        is_admin = claims.get('is_admin', False)
 
-        """invalid data will reject"""
+        place = facade.get_place(place_id)
+        if not place:
+            return {"error": "Place not found"}, 404
 
+        if not is_admin and place.owner_id != current_user:
+            return {'error': 'Unauthorized action'}, 403
+
+        place_data = api.payload
         if not place_data:
             return {"error": "No update data provided"}, 400
 
         try:
             updated_place = facade.update_place(place_id, place_data)
-
         except (ValueError, TypeError) as error:
             return {"error": str(error)}, 400
-
-        if not updated_place:
-            return {"error": "Place not found"}, 404
 
         return {"message": "Place updated successfully"}, 200
