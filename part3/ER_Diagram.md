@@ -33,8 +33,8 @@ erDiagram
   }
   REVIEW {
     string id PK
-    string comment
-    float rating
+    string text
+    int rating
     string user_id FK
     string place_id FK
     datetime created_at
