@@ -48,7 +48,7 @@ erDiagram
     timestamp updated_at
   }
   PLACE_AMENITY {
-    string place_id PK
-    string amenity_id PK
+    string place_id PK,FK
+    string amenity_id PK,FK
   }
 ```
