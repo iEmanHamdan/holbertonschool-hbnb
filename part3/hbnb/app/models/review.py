@@ -1,35 +1,55 @@
+from app import db
 from app.models.basemodel import BaseModel
+from sqlalchemy.orm import validates
 
 class Review(BaseModel):
-    def __init__(self, text, rating, place_id, user_id):
-        super().__init__()
-        self.validate_review_data(text, rating)
+    __tablename__ = 'reviews'
+
+    text = db.Column(db.Text, nullable=False)
+    rating = db.Column(db.Integer, nullable=False)
+    place_id = db.Column(db.String(36), nullable=False)
+    user_id = db.Column(db.String(36), nullable=False)
+
+
+    def __init__(self, text, rating, place_id, user_id, **kwargs):
+        super().__init__(**kwargs)
+       
 
         self.text = text
-        self.rating = int(rating)
+        self.rating = rating
         self.place_id = place_id
         self.user_id = user_id
 
-@staticmethod
-def validate_review_data(text, rating):
-    if not text:
-        raise ValueError("Review text cannot be empty")
-    if not (1<= int(rating) <=5):
-        raise ValueError("Rating must be an integer between 1 and 5")
 
-    def update(self, data):
-        text = data.get('text', self.text)
-        rating = data.get('rating', self.rating)
+    @validates("text")
+    def validate_text(self, key, text):
+        if not text or not text.strip():
+            raise ValueError("Review text cannot be empty")
 
-        self.validate_review_data(text, rating)
-        super().update(data)
+        return text.strip()
 
+    @validates("rating")
+    def validate_rating(self, key, rating):
+        try:
+            rating = int(rating)
+        except (ValueError, TypeError):
+            raise ValueError("Rating must be an integer")
 
-        def to_dict(self):
-            return {
-                "id": self.id,
-                "text": self.text,
-                "rating": self.rating,
-                "user_id": self.user_id,
-                "place_id": self.place_id
-            }
+        if not 1 <= rating <= 5:
+            raise ValueError(
+                "Rating must be an integer between 1 and 5"
+            )
+        return rating
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "text": self.text,
+            "rating": self.rating,
+            "user_id": self.user_id,
+            "place_id": self.place_id,
+            "created_at": self.created_at.isoformat()
+            if self.created_at else None,
+            "updated_at": self.updated_at.isoformat()
+            if self.updated_at else None
+        }
