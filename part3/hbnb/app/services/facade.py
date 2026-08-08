@@ -1,6 +1,6 @@
 import email
-
 from app.persistence.repository import SQLAlchemyRepository
+from app.persistence.user_repository import UserRepository
 from app.models.user import User
 from app.models.amenity import Amenity
 from app.models.place import Place
@@ -8,13 +8,12 @@ from app.models.review import Review
 
 class HBnBFacade:
     def __init__(self):
-        self.user_repo = SQLAlchemyRepository(User)
+        self.user_repo = UserRepository()
         self.place_repo = SQLAlchemyRepository(Place)
         self.review_repo = SQLAlchemyRepository(Review)
         self.amenity_repo = SQLAlchemyRepository(Amenity)
 
     # --- USER OPERATIONS ---
-    
     def create_user(self, user_data):
         clean_data = {
             'first_name': user_data.get('first_name'),
@@ -25,10 +24,9 @@ class HBnBFacade:
         
         user = User(**clean_data)
         existing_user = self.get_user_by_email(user.email)
-
         if existing_user:
             raise ValueError("Email already registered")
-       
+            
         self.user_repo.add(user)
         return user
 
@@ -39,36 +37,29 @@ class HBnBFacade:
         return self.user_repo.get_all()
 
     def get_user_by_email(self, email):
-        
         if not isinstance(email, str):
             return None
-        
-        return self.user_repo.get_by_attribute('email', email)
+        return self.user_repo.get_user_by_email(email)
 
-        
-    """We update this part to reject any invalid email form like  @mlsdc.com or ldsef@dlc or scdsc@ etc..."""
     def update_user(self, user_id, user_data):
         user = self.user_repo.get(user_id)
-
         if not user:
             return None
-
+            
         allowed_fields = {"first_name", "last_name", "email"}
         clean_data = {key: value for key, value in user_data.items()
-                    if key in allowed_fields}
-
+                      if key in allowed_fields}
+                      
         if "email" in clean_data:
-            new_email = clean_data["email"] 
-
+            new_email = clean_data["email"]
             if isinstance(new_email, str):
                 new_email = new_email
                 clean_data["email"] = new_email
-
+                
             existing_user = self.get_user_by_email(new_email)
-
             if existing_user and existing_user.id != user_id:
                 raise ValueError("Email already registered")
-
+                
         self.user_repo.update(user_id, clean_data)
         return self.user_repo.get(user_id)
 
@@ -78,7 +69,6 @@ class HBnBFacade:
             'name': amenity_data.get('name'),
             'description': amenity_data.get('description', '')
         }
-        
         amenity = Amenity(**clean_data)
         self.amenity_repo.add(amenity)
         return amenity
@@ -103,7 +93,6 @@ class HBnBFacade:
             'longitude': float(place_data.get('longitude', 0.0)),
             'owner_id': place_data.get('owner_id')
         }
-        
         place = Place(**clean_data)
         self.place_repo.add(place)
         return place
