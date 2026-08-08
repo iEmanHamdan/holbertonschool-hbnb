@@ -1,109 +1,88 @@
+from app import db
 from app.models.basemodel import BaseModel
+from sqlalchemy.orm import validates
+
 
 class Place(BaseModel):
-    def __init__(self, title, description, price, latitude, longitude, owner_id):
-        super().__init__()
-        self.validate_place_data(title, price, latitude, longitude)
+    __tablename__ = 'places'
+
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    price = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    owner_id = db.Column(db.String(36), nullable=False)
+
+    
+    def __init__(self, title, description, price, latitude, longitude, owner_id = None, **kwargs):
+        super().__init__(**kwargs)
+        
 
         self.title = title
         self.description = description
-        self.price = float(price)
-        self.latitude = float(latitude)
-        self.longitude = float(longitude)
+        self.price = price
+        self.latitude = latitude
+        self.longitude = longitude
         self.owner_id = owner_id
-        self._owner = None
-        self.reviews = []
-        self.amenities = []
-    
-        @staticmethod 
-        def validate_place_data(title, price, latitude, longitude):
-            if not title or len(title.strip()) == 0: raise ValueError("Title cannot be empty")
-        if float(price) < 0: raise ValueError("Price must be a positive value")
-        if not (-90.0 <= float(latitude) <= 90.0): raise ValueError("Latitude must be between -90.0 and 90.0")
-        if not (-180.0 <= float(longitude) <= 180.0): raise ValueError("Longitude must be between -180.0 and 180.0")
+            
 
-def update(self, data):
-    title = data.get("title", self.title)
-    price = data.get("price", self.price)
-    latitude = data.get("latitude", self.latitude)
-    longitude = data.get("longitude", self.longitude)
+    @validates('title')
+    def validate_title(self, key, title):
+        if not title or not title.strip():
+            raise ValueError("Title is required")
 
-    self.validate_place_data(title, price, latitude, longitude)
-    super().update(data)
+        if len(title.strip()) > 100:
+            raise ValueError("Title cannot exceed 100 characters")
 
-def add_review(self, review):
-    """Add a review to the place."""
-    self.reviews.append(review)
+        return title.strip()
 
-    def add_amenity(self, amenity):
-        """Add an amenity to the place."""
-        self.amenities.append(amenity)
+    @validates('price')
+    def validate_price(self, key, price):
+        try:
+            price = float(price)
+        except (ValueError, TypeError):
+            raise ValueError("Price must be a number")
 
-    @property
-    def owner(self):
-        """Return the actual owner object if resolved, otherwise a proxy."""
-        if self._owner:
-            return self._owner
-        
-        class OwnerProxy:
-            def __init__(self, owner_id):
-                self.id = owner_id
-                self.first_name = "Unknown"
-                self.last_name = "User"
-                self.email = "unknown@example.com"
-        return OwnerProxy(self.owner_id)
+        if price < 0:
+            raise ValueError("Price must be non-negative")
 
-    @owner.setter
-    def owner(self, user_obj):
-        """Allow setting the actual user object as the owner."""
-        self._owner = user_obj
-        if user_obj:
-            self.owner_id = user_obj.id
+        return price
 
-    def to_dict(self, detailed=True):
-        """Return a dictionary representation."""
-        if not detailed:
-            return {
-                "id": self.id,
-                "title": self.title,
-                "latitude": self.latitude,
-                "longitude": self.longitude
-            }
+    @validates('latitude')
+    def validate_latitude(self, key, latitude):
+        try:
+            latitude = float(latitude)
+        except (ValueError, TypeError):
+            raise ValueError("Latitude must be a number")
 
-        return {
-            "id": self.id,
+        if not -90 <= latitude <= 90:
+            raise ValueError("Latitude must be between -90 and 90")
+
+        return latitude
+
+    @validates('longitude')
+    def validate_longitude(self, key, longitude):
+        try:
+            longitude = float(longitude)
+        except (ValueError, TypeError):
+            raise ValueError("Longitude must be a number")
+
+        if not -180 <= longitude <= 180:
+            raise ValueError("Longitude must be between -180 and 180")
+
+        return longitude
+
+    def to_dict(self):
+        data = super().to_dict()
+
+        data.update({
             "title": self.title,
             "description": self.description,
             "price": self.price,
             "latitude": self.latitude,
             "longitude": self.longitude,
-            "owner": {
-                "id": self.owner.id,
-                "first_name": self.owner.first_name,
-                "last_name": self.owner.last_name,
-                "email": self.owner.email
-            },
-            "amenities": [
-                {
-                    "id": amenity.id,
-                    "name": amenity.name
-                }
-                for amenity in self.amenities
-            ],
-            "reviews": [
-                {
-                    "id": review.id,
-                    "text": review.text,
-                    "rating": review.rating,
-                    "user_id": review.user_id
-                }
-                for review in self.reviews
-            ]
-        }
+            "owner_id": self.owner_id
+        })
 
-        """
-        - Attribute Definitions and Validation in Place Class: Place has required attributes and range checks for coordinates and price, but owner existence validation is not enforced
+        return data
 
-
-
-        """

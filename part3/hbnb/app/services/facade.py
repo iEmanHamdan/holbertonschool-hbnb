@@ -88,9 +88,9 @@ class HBnBFacade:
         clean_data = {
             'title': place_data.get('title'),
             'description': place_data.get('description', ''),
-            'price': float(place_data.get('price', 0.0)),
-            'latitude': float(place_data.get('latitude', 0.0)),
-            'longitude': float(place_data.get('longitude', 0.0)),
+            'price': float(place_data.get('price')),
+            'latitude': float(place_data.get('latitude')),
+            'longitude': float(place_data.get('longitude')),
             'owner_id': place_data.get('owner_id')
         }
         place = Place(**clean_data)
@@ -120,12 +120,18 @@ class HBnBFacade:
         return self.review_repo.get_all()
 
     def get_reviews_by_place(self, place_id):
-        return [r for r in self.review_repo.get_all() if r.place_id == place_id]
+        return [r for r in self.review_repo.get_all() 
+                if r.place_id == place_id]
 
     def update_review(self, review_id, review_data):
         self.review_repo.update(review_id, review_data)
         return self.review_repo.get(review_id)
 
     def delete_review(self, review_id):
-        self.review_repo.delete(review_id)
+        # we need to handle the case where the review does not exist
+        
+        review = self.review_repo.get(review_id)
+        if not review:
+            return False
+        self.review_repo.delete(review_id) 
         return True
