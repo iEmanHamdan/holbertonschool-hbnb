@@ -1,5 +1,4 @@
 
--- ذبيت دا كلو
 
 INSERT INTO users (
     id,

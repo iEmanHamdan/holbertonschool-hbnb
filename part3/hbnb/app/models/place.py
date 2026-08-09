@@ -17,10 +17,8 @@ class Place(BaseModel):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
 
-    #  relationships mapping for foreign keys and backrefs
     owner_id = db.Column(db.String(36), db.ForeignKey("users.id"), nullable=False)
     reviews = db.relationship("Review", backref="place", lazy=True)
-# باللهي شيكيلي على الليزي و باكريف
     amenities = db.relationship("Amenity", secondary=place_amenity, lazy="subquery", backref="places")
 
     def __init__(self, title, description, price, latitude, longitude, owner_id = None, **kwargs):

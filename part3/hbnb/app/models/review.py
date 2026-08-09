@@ -5,7 +5,6 @@ from sqlalchemy.orm import validates
 class Review(BaseModel):
     __tablename__ = 'reviews'
 
-# مو المفروض يكون اسمها كومنت بدل تيكست؟
 
     text = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)

@@ -11,7 +11,6 @@ class User(BaseModel):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-# شيكيلي بالله على اليوزر هو اونر ولا يوزر
     places = db.relationship('Place', backref='user', lazy=True)
     reviews = db.relationship('Review', backref='user', lazy=True)
 
