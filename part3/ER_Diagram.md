@@ -9,6 +9,8 @@ erDiagram
   PLACE ||--o{ REVIEW : gets
   PLACE ||--o{ PLACE_AMENITY : has
   AMENITY ||--o{ PLACE_AMENITY : included_in
+  USER ||--o{ BOOKING : makes
+  PLACE ||--o{ BOOKING : gets_booked
 
   USER {
     String id PK
@@ -50,5 +52,15 @@ erDiagram
   PLACE_AMENITY {
     string place_id PK,FK
     string amenity_id PK,FK
+  }
+  BOOKING {
+    string id PK
+    string user_id FK
+    string place_id FK
+    datetime start_date
+    datetime end_date
+    string status
+    datetime created_at
+    datetime updated_at
   }
 ```
