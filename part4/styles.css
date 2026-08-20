@@ -1,4 +1,6 @@
-/* Flexible Parameters: Mantu Palette */
+/* ==========================================================================
+   MANTU PALETTE & GLOBAL STYLES
+   ========================================================================== */
 :root {
     --hbnb-burgundy: #8A3231;
     --warm-gold: #EFCC5B;
@@ -20,7 +22,7 @@ body {
 }
 
 /* ==========================================================================
-   EDITORIAL HEADER (Matches screenshot top bar)
+   EDITORIAL HEADER (Left-Aligned Logo & Icons)
    ========================================================================== */
 .editorial-header {
     display: flex;
@@ -29,7 +31,7 @@ body {
     background-color: var(--cream);
     position: relative;
     z-index: 10;
-    gap: 40px; /* Adds space between the logo and the navigation links */
+    gap: 40px; 
 }
 
 .logo-container {
@@ -48,10 +50,9 @@ body {
 }
 
 .right-nav {
-    margin-left: auto; /* This pushes the login button to the far right edge */
+    margin-left: auto; 
 }
 
-/* Rest of your nav link styling remains exactly the same */
 .nav-group a {
     display: flex;
     align-items: center;
@@ -74,30 +75,17 @@ body {
     width: auto;
     object-fit: contain;
 }
-.right-nav {
-    justify-content: flex-end;
-}
-
-.logo-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-}
-
-.logo {
-    height: 50px; /* Fits Holberton requirement */
-    object-fit: contain;
-}
 
 .login-button {
     background-color: var(--dark-brown);
     color: var(--cream) !important;
     padding: 10px 24px;
     border-radius: 30px;
+    text-decoration: none;
 }
 
 /* ==========================================================================
-   PRESTIGE HERO (The core layout from the screenshot)
+   PRESTIGE HERO (3D Layout)
    ========================================================================== */
 .prestige-hero {
     position: relative;
@@ -116,7 +104,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -70%);
-    font-size: 16vw; /* Makes the text scale with the screen */
+    font-size: 16vw; 
     font-weight: 900;
     color: var(--dark-brown);
     line-height: 0.8;
@@ -134,11 +122,10 @@ body {
     height: 75%;
     max-width: 90%;
     object-fit: contain;
-    z-index: 2; /* Puts the tent over the massive text */
+    z-index: 2; 
     pointer-events: none;
 }
 
-/* Left Widget (The card and text) */
 .hero-left-widget {
     position: absolute;
     left: 5vw;
@@ -188,7 +175,6 @@ body {
     line-height: 1.6;
 }
 
-/* Right Widget (Text and Button) */
 .hero-right-widget {
     position: absolute;
     right: 5vw;
@@ -223,7 +209,7 @@ body {
 }
 
 /* ==========================================================================
-   HOLBERTON MANDATORY PARAMETERS (Rest of the page)
+   MAIN CONTENT & CARDS (Strict Holberton Rules)
    ========================================================================== */
 .content-main {
     padding: 0 5vw 60px 5vw;
@@ -250,7 +236,6 @@ body {
     justify-content: flex-start;
 }
 
-/* STRICT Holberton Rules for cards */
 .place-card, .review-card {
     margin: 20px;
     padding: 10px;
@@ -280,6 +265,55 @@ body {
     margin-top: 15px;
 }
 
+/* ==========================================================================
+   FORMS & PLACE DETAILS (Login / Add Review)
+   ========================================================================== */
+.form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form input, .form select, .form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    background-color: var(--warm-gold);
+    color: var(--dark-brown);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+.place-details, .place-info {
+    margin: 20px 5vw;
+    padding: 20px;
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
 footer {
     text-align: center;
     padding: 30px;
