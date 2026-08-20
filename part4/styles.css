@@ -22,21 +22,37 @@ body {
 }
 
 /* ==========================================================================
-   EDITORIAL HEADER (Left-Aligned Logo & Icons)
+   EDITORIAL HEADER (Left Logo, Center Nav, Right Auth)
    ========================================================================== */
 .editorial-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 20px 5vw;
     background-color: var(--cream);
     position: relative;
     z-index: 10;
-    gap: 40px; 
 }
 
-.logo-container {
+/* Forces the 3 sections to take up equal space so the middle is perfectly centered */
+.header-left, .header-middle, .header-right {
+    flex: 1;
     display: flex;
     align-items: center;
+}
+
+.header-left {
+    justify-content: flex-start;
+}
+
+.header-middle {
+    justify-content: center;
+    gap: 30px;
+}
+
+.header-right {
+    justify-content: flex-end;
+    gap: 20px;
 }
 
 .logo {
@@ -44,16 +60,7 @@ body {
     object-fit: contain;
 }
 
-.nav-group {
-    display: flex;
-    gap: 30px;
-}
-
-.right-nav {
-    margin-left: auto; 
-}
-
-.nav-group a {
+.header-middle a {
     display: flex;
     align-items: center;
     gap: 8px; 
@@ -66,7 +73,7 @@ body {
     transition: opacity 0.2s ease;
 }
 
-.nav-group a:hover {
+.header-middle a:hover {
     opacity: 0.7; 
 }
 
@@ -76,12 +83,36 @@ body {
     object-fit: contain;
 }
 
+/* Sign Up Button (Plain text link) */
+.signup-button {
+    text-decoration: none;
+    color: var(--dark-brown);
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.signup-button:hover {
+    color: var(--hbnb-burgundy);
+}
+
+/* Log In Button (Pill shape) */
 .login-button {
     background-color: var(--dark-brown);
     color: var(--cream) !important;
     padding: 10px 24px;
     border-radius: 30px;
     text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: var(--hbnb-burgundy);
 }
 
 /* ==========================================================================

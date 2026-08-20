@@ -8,14 +8,16 @@
     <link rel="icon" href="images/icon.png">
 </head>
 <body>
-   <header class="editorial-header">
-        <!-- 1. Logo moved to the left -->
-        <a href="index.html" class="logo-container">
-            <img src="images/HBnB-Logo.png" alt="Logo" class="logo">
-        </a>
+    <header class="editorial-header">
+        <!-- 1. LEFT: Logo -->
+        <div class="header-left">
+            <a href="index.html" class="logo-container">
+                <img src="images/HBnB-Logo.png" alt="Logo" class="logo">
+            </a>
+        </div>
         
-        <!-- 2. Navigation links next to the logo with distinct icons -->
-        <div class="nav-group">
+        <!-- 2. MIDDLE: Navigation links -->
+        <div class="header-middle">
             <a href="index.html">
                 <img src="images/home-icon.png" alt="Home" class="nav-icon">
                 Home
@@ -26,69 +28,11 @@
             </a>
         </div>
         
-        <!-- 3. Login button stays on the far right -->
-        <div class="nav-group right-nav">
-            <a href="login.html" id="login-link" class="login-button">Log In</a>
-        </div>
-    </header>
-        
-        <!-- Central Logo -->
-        <a href="index.html" class="logo-container">
-            <img src="images/HBnB-Logo.png" alt="Logo" class="logo">
-        </a>
-        
-        <div class="nav-group right-nav">
+        <!-- 3. RIGHT: Auth buttons -->
+        <div class="header-right">
+            <a href="login.html" class="signup-button">Sign Up</a>
             <a href="login.html" id="login-link" class="login-button">Log In</a>
         </div>
     </header>
 
     <!-- NEW EDITORIAL HERO SECTION -->
-    <section class="prestige-hero">
-        <!-- The Massive Background Text -->
-        <h1 class="massive-text">HERITAGE</h1>
-        
-        <!-- The overlapping 3D Tent -->
-        <img src="images/3dhb.png" alt="Mantu Tent" class="hero-3d-model">
-
-        <!-- Left floating widget (matches the video card in your screenshot) -->
-        <div class="hero-left-widget">
-            <div class="hero-image-card">
-                <div class="play-btn">▶</div>
-            </div>
-            <p>With deep cultural roots and diverse locations, we curate exceptional stays for the ambitious traveler.</p>
-            <div class="hero-stats">
-                <span>15 regions</span><br>
-                <span>80+ properties</span>
-            </div>
-        </div>
-
-        <!-- Right floating widget (matches the text and button in your screenshot) -->
-        <div class="hero-right-widget">
-            <p>We curate accommodations that combine tradition, elegance, and modern comfort. Each Mantu stay balances authentic form and function.</p>
-            <a href="#places-list" class="explore-btn">EXPLORE MORE</a>
-        </div>
-    </section>
-
-    <main class="content-main">
-        <div class="filter-container">
-            <label for="price-filter">Filter by Price:</label>
-            <select id="price-filter">
-                <option value="All">All</option>
-                <option value="10">$10</option>
-                <option value="50">$50</option>
-                <option value="100">$100</option>
-            </select>
-        </div>
-
-        <section id="places-list">
-            <!-- JS will append .place-card elements here -->
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 HBnB Mantu. All rights reserved.</p>
-    </footer>
-
-    <script src="scripts.js"></script>
-</body>
-</html>
