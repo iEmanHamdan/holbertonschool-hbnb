@@ -9,28 +9,50 @@
 </head>
 <body>
 
-    <header>
-        <a href="index.html">
-            <img src="images/HBnB-Logo.png" alt="HBnB Logo" class="logo">
-        </a>
-        <nav>
-            <a href="login.html" id="login-link" class="login-button">Login</a>
-        </nav>
-    </header>
+    <!-- Hero Section encompassing the Header and Search Pill -->
+    <section class="hero">
+        <header class="transparent-header">
+            <a href="index.html">
+                <img src="images/HBnB-Logo.png" alt="HBnB Logo" class="logo">
+            </a>
+            
+            <nav class="center-nav">
+                <a href="#">Properties</a>
+                <a href="#">Attractions</a>
+                <a href="#">Popular</a>
+            </nav>
 
-    <main>
-        <section class="filter-section">
-            <label for="price-filter">Max Price Per Night:</label>
-            <select id="price-filter">
-                <option value="all">All</option>
-                <option value="10">$10</option>
-                <option value="50">$50</option>
-                <option value="100">$100</option>
-            </select>
-        </section>
+            <nav class="auth-nav">
+                <a href="login.html" class="signup-button">Sign up</a>
+                <a href="login.html" id="login-link" class="login-button">Log in</a>
+            </nav>
+        </header>
 
+        <div class="hero-content">
+            <h1>Book your stay with Mantu</h1>
+            <p>Exclusive rooms around the world are waiting for you!</p>
+        </div>
+
+        <!-- The floating search/filter pill -->
+        <div class="search-pill">
+            <div class="filter-wrapper">
+                <label for="price-filter">Max Price:</label>
+                <select id="price-filter">
+                    <option value="all">All Prices</option>
+                    <option value="10">$10</option>
+                    <option value="50">$50</option>
+                    <option value="100">$100</option>
+                </select>
+            </div>
+            <button class="search-btn">→</button>
+        </div>
+    </section>
+
+    <main class="destinations-main">
+        <h2 class="section-title">Popular destinations</h2>
+        
         <!-- Dynamic Places Container -->
-        <section id="places-list"></section>
+        <section id="places-list" class="places-grid"></section>
     </main>
 
     <footer>
