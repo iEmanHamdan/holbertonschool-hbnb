@@ -1,23 +1,15 @@
 /* ==========================================================================
-   MANTU LUXURY THEME & PALETTE VARIABLES
+   MANTU LUXURY THEME & VARIABLES
    ========================================================================== */
 :root {
-    /* Primary Brand & Action */
     --hbnb-burgundy: #8A3231;
     --deep-burgundy: #6E2A29;
     --warm-gold: #EFCC5B;
-    --golden-light: #F8D75F;
-    
-    /* Backgrounds & Neutrals */
     --cream: #F8F0DD;
     --warm-beige: #E8D8B5;
-    --sand-gold: #C7A056;
     --white: #FFFFFF;
-    
-    /* Typography & Dark Elements */
     --dark-brown: #4E321C;
     --black: #171717;
-    --gray-light: #f9f9f9;
 }
 
 * {
@@ -29,58 +21,19 @@
 body {
     background-color: var(--cream);
     color: var(--black);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-main {
-    flex: 1;
-    padding: 20px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-}
-
 /* ==========================================================================
-   HEADER & NAVIGATION
+   HERO SECTION (Background & Layout)
    ========================================================================== */
-header {
-    background-color: var(--white);
-    padding: 15px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid var(--warm-beige);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.logo {
-    height: 55px;
-    object-fit: contain;
-    cursor: pointer;
-}
-
-.login-button {
-    background-color: var(--hbnb-burgundy);
-    color: var(--white);
-    padding: 10px 22px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    display: inline-block;
-}
-
-.login-button:hover {
-    background-color: var(--deep-burgundy);
-}
-
 .hero {
     position: relative;
-    /* Updated to use your local rm.png image with a darkening overlay */
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), 
+    /* Uses your local rm.png image with a slight dark overlay to make text pop */
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
                 url('images/rm.png') no-repeat center center/cover;
     height: 70vh;
     min-height: 500px;
@@ -89,203 +42,229 @@ header {
     align-items: center;
     justify-content: center;
     margin-bottom: 60px;
+    width: 100%;
 }
 
 /* ==========================================================================
-   FILTER SECTION (INDEX)
+   TRANSPARENT HEADER (Logo & Navigation)
    ========================================================================== */
-.filter-section {
+.transparent-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-    padding: 15px 25px;
-    background-color: var(--white);
-    border-radius: 8px;
-    border: 1px solid var(--warm-beige);
+    padding: 20px 50px;
+    background: transparent;
+    z-index: 10;
 }
 
-.filter-section label {
+.transparent-header .logo {
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.center-nav a {
+    color: var(--white);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    font-size: 16px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Helps text stand out */
+}
+
+.auth-nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.signup-button {
+    background-color: var(--white);
+    color: var(--hbnb-burgundy);
+    padding: 10px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.login-button {
+    background-color: var(--hbnb-burgundy);
+    color: var(--white);
+    padding: 10px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   HERO TEXT (Arabic compatibility)
+   ========================================================================== */
+.hero-content {
+    text-align: center;
+    color: var(--white);
+    margin-top: -50px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Ensures Arabic text is readable against sand */
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   SEARCH PILL (Floating Filter)
+   ========================================================================== */
+.search-pill {
+    position: absolute;
+    bottom: -35px;
+    background: var(--white);
+    width: 80%;
+    max-width: 900px;
+    height: 70px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px 10px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 10;
+}
+
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-wrapper label {
     font-weight: bold;
     color: var(--dark-brown);
 }
 
-.filter-section select {
-    padding: 8px 14px;
-    border: 1px solid var(--sand-gold);
-    border-radius: 6px;
-    background-color: var(--white);
+.filter-wrapper select {
+    border: none;
+    font-size: 16px;
     color: var(--dark-brown);
-    font-size: 14px;
-    font-weight: 500;
     outline: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.search-btn {
+    background-color: var(--hbnb-burgundy);
+    color: var(--white);
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.search-btn:hover {
+    background-color: var(--deep-burgundy);
 }
 
 /* ==========================================================================
-   MANDATORY CARD PARAMETERS (PLACE & REVIEW CARDS)
+   DESTINATIONS GRID & CARDS
    ========================================================================== */
-.place-card, 
-.review-card {
+.destinations-main {
+    flex: 1;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    width: 100%;
+}
+
+.section-title {
+    color: var(--black);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.places-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+/* Mandatory Parameters maintained */
+.place-card {
     background-color: var(--white);
-    margin: 20px;
+    margin: 20px; 
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+    width: calc(33.333% - 40px);
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease;
 }
 
-#places-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 10px;
+.place-card:hover {
+    transform: translateY(-5px);
+}
+
+.place-card-image-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: var(--warm-beige);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-size: cover;
+    background-position: center;
 }
 
 .place-card h3 {
-    color: var(--hbnb-burgundy);
-    margin-bottom: 8px;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    color: var(--black);
 }
 
 .place-card .price {
-    font-weight: bold;
+    margin-bottom: 15px;
     color: var(--dark-brown);
-    margin-bottom: 12px;
+    font-weight: bold;
 }
 
 .details-button {
-    background-color: var(--warm-gold);
+    margin-top: auto;
+    text-align: center;
+    background: var(--warm-beige);
     color: var(--dark-brown);
     border: none;
-    padding: 9px 18px;
+    padding: 10px 18px;
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
     transition: background-color 0.2s ease;
 }
 
 .details-button:hover {
-    background-color: var(--golden-light);
-}
-
-/* ==========================================================================
-   PLACE DETAILS & INTERACTIVE MAP
-   ========================================================================== */
-.place-details {
-    background-color: var(--white);
-    padding: 25px;
-    border-radius: 10px;
-    border: 1px solid var(--warm-beige);
-    margin-bottom: 25px;
-}
-
-.place-info {
-    margin: 15px 0;
-    line-height: 1.6;
-}
-
-.place-info p {
-    margin-bottom: 10px;
-}
-
-.amenities-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-}
-
-.amenity-badge {
-    background-color: var(--warm-beige);
-    color: var(--dark-brown);
-    padding: 5px 12px;
-    border-radius: 15px;
-    font-size: 13px;
-    font-weight: 500;
-}
-
-#place-map {
-    height: 320px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid var(--sand-gold);
-    margin: 20px 0;
-    z-index: 1;
-}
-
-/* ==========================================================================
-   REVIEWS & FORMS
-   ========================================================================== */
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.review-card .user-name {
-    font-weight: bold;
-    color: var(--hbnb-burgundy);
-}
-
-.review-card .rating {
-    color: var(--sand-gold);
-    font-weight: bold;
-}
-
-.form-container {
-    max-width: 500px;
-    margin: 40px auto;
-    background-color: var(--white);
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.form-group {
-    margin-bottom: 18px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    color: var(--dark-brown);
-    margin-bottom: 6px;
-}
-
-.form-group input, 
-.form-group textarea, 
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--warm-beige);
-    border-radius: 6px;
-    font-size: 15px;
-    outline: none;
-}
-
-.form-group input:focus, 
-.form-group textarea:focus, 
-.form-group select:focus {
-    border-color: var(--hbnb-burgundy);
-}
-
-.submit-btn {
-    width: 100%;
-    background-color: var(--hbnb-burgundy);
-    color: var(--white);
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.submit-btn:hover {
-    background-color: var(--deep-burgundy);
+    background-color: var(--warm-gold);
 }
 
 /* ==========================================================================
@@ -295,7 +274,7 @@ footer {
     background-color: var(--dark-brown);
     color: var(--warm-beige);
     text-align: center;
-    padding: 18px;
+    padding: 20px;
     margin-top: auto;
     font-size: 14px;
 }
