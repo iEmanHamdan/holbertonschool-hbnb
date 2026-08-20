@@ -24,24 +24,38 @@ body {
    ========================================================================== */
 .editorial-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 20px 5vw;
     background-color: var(--cream);
     position: relative;
     z-index: 10;
+    gap: 40px; /* Adds space between the logo and the navigation links */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 50px;
+    object-fit: contain;
 }
 
 .nav-group {
     display: flex;
     gap: 30px;
-    flex: 1;
 }
 
+.right-nav {
+    margin-left: auto; /* This pushes the login button to the far right edge */
+}
+
+/* Rest of your nav link styling remains exactly the same */
 .nav-group a {
     display: flex;
     align-items: center;
-    gap: 8px; /* Adds perfect spacing between the icon and the text */
+    gap: 8px; 
     text-decoration: none;
     color: var(--dark-brown);
     font-size: 13px;
@@ -52,16 +66,14 @@ body {
 }
 
 .nav-group a:hover {
-    opacity: 0.7; /* Adds a nice fade effect when hovering */
+    opacity: 0.7; 
 }
 
-/* Styles the new custom icons */
 .nav-icon {
-    height: 18px; /* Keeps the icon proportional to your 13px text */
+    height: 18px; 
     width: auto;
     object-fit: contain;
 }
-
 .right-nav {
     justify-content: flex-end;
 }
