@@ -3,44 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - HBnB Mantu</title>
+    <title>HBnB - Login</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/icon.png">
 </head>
 <body>
-
-    <header class="solid-header">
+    <header>
         <a href="index.html">
-            <img src="images/HBnB-Logo.png" alt="HBnB Logo" class="logo">
+            <img src="images/HBnB-Logo.png" alt="Logo" class="logo">
         </a>
-        
-        <nav class="center-nav">
+        <nav>
             <a href="index.html">Home</a>
-            <a href="index.html#places-list">Places</a>
-        </nav>
-
-        <nav class="auth-nav">
-            <a href="index.html" class="login-button">Back to Home</a>
         </nav>
     </header>
 
     <main>
-        <section class="form-container">
-            <h2>Welcome Back</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
-                </div>
-                
-                <button type="submit" class="submit-btn">Log In</button>
-            </form>
-        </section>
+        <form id="login-form" class="form">
+            <h2>Login</h2>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Log In</button>
+        </form>
     </main>
 
     <footer>

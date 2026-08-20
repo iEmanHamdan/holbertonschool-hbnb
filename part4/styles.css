@@ -1,382 +1,127 @@
-/* ==========================================================================
-   MANTU LUXURY THEME & VARIABLES
-   ========================================================================== */
+/* Flexible Parameters: Mantu Palette */
 :root {
     --hbnb-burgundy: #8A3231;
-    --deep-burgundy: #6E2A29;
     --warm-gold: #EFCC5B;
     --cream: #F8F0DD;
-    --warm-beige: #E8D8B5;
-    --white: #FFFFFF;
     --dark-brown: #4E321C;
-    --black: #171717;
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --white: #FFFFFF;
 }
 
 body {
+    font-family: Arial, sans-serif;
     background-color: var(--cream);
-    color: var(--black);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: var(--dark-brown);
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* ==========================================================================
-   HERO SECTION (Background & Layout)
-   ========================================================================== */
-.hero {
-    position: relative;
-    /* Uses your local rm.png image with a slight dark overlay to make text pop */
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), 
-                url('images/rm.png') no-repeat center center/cover;
-    height: 70vh;
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 60px;
-    width: 100%;
-}
-
-/* ==========================================================================
-   TRANSPARENT HEADER (Logo & Navigation)
-   ========================================================================== */
-.transparent-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* Required Structure: Header */
+header {
+    background-color: var(--white);
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background: transparent;
-    z-index: 10;
+    border-bottom: 2px solid var(--hbnb-burgundy);
 }
 
-.transparent-header .logo {
+.logo {
     height: 60px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    padding: 5px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.center-nav a {
-    color: var(--white);
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: 500;
-    font-size: 16px;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Helps text stand out */
-}
-
-.auth-nav {
+/* Required Structure: Navigation Bar */
+nav {
     display: flex;
     gap: 15px;
     align-items: center;
 }
 
-.signup-button {
-    background-color: var(--white);
-    color: var(--hbnb-burgundy);
-    padding: 10px 24px;
-    border-radius: 25px;
+nav a {
     text-decoration: none;
+    color: var(--dark-brown);
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
+/* Required Structure: Login Button */
 .login-button {
     background-color: var(--hbnb-burgundy);
     color: var(--white);
-    padding: 10px 24px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    padding: 10px 20px;
+    border-radius: 5px;
 }
 
-/* ==========================================================================
-   HERO TEXT (Arabic compatibility)
-   ========================================================================== */
-.hero-content {
-    text-align: center;
-    color: var(--white);
-    margin-top: -50px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Ensures Arabic text is readable against sand */
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-.hero-content p {
-    font-size: 1.3rem;
-    font-weight: 500;
-}
-
-/* ==========================================================================
-   SEARCH PILL (Floating Filter)
-   ========================================================================== */
-.search-pill {
-    position: absolute;
-    bottom: -35px;
-    background: var(--white);
-    width: 80%;
-    max-width: 900px;
-    height: 70px;
-    border-radius: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 10px 10px 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    z-index: 10;
-}
-
-.filter-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.filter-wrapper label {
-    font-weight: bold;
-    color: var(--dark-brown);
-}
-
-.filter-wrapper select {
-    border: none;
-    font-size: 16px;
-    color: var(--dark-brown);
-    outline: none;
-    background: transparent;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.search-btn {
-    background-color: var(--hbnb-burgundy);
-    color: var(--white);
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s;
-}
-
-.search-btn:hover {
-    background-color: var(--deep-burgundy);
-}
-
-/* ==========================================================================
-   DESTINATIONS GRID & CARDS
-   ========================================================================== */
-.destinations-main {
+main {
     flex: 1;
-    padding: 40px;
-    max-width: 1200px;
-    margin: 40px auto 0 auto;
-    width: 100%;
+    padding: 20px;
 }
 
-.section-title {
-    color: var(--black);
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    margin-left: 20px;
-}
-
-.places-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-}
-
-/* Mandatory Parameters maintained */
-.place-card {
-    background-color: var(--white);
-    margin: 20px; 
+/* --- FIXED PARAMETERS (MANDATORY) --- */
+.place-card, .review-card {
+    margin: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    width: calc(33.333% - 40px);
-    min-width: 300px;
+    background-color: var(--white);
+}
+
+#places-list {
     display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-    transition: transform 0.2s ease;
+    flex-wrap: wrap;
 }
 
-.place-card:hover {
-    transform: translateY(-5px);
+/* Form Styling */
+.form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
-.place-card-image-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: var(--warm-beige);
-    border-radius: 8px;
-    margin-bottom: 15px;
-    background-size: cover;
-    background-position: center;
-}
-
-.place-card h3 {
-    margin-top: 5px;
-    font-size: 1.2rem;
-    color: var(--black);
-}
-
-.place-card .price {
-    margin-bottom: 15px;
-    color: var(--dark-brown);
+.form label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.details-button {
-    margin-top: auto;
-    text-align: center;
-    background: var(--warm-beige);
+.form input, .form select, .form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"], .details-button {
+    background-color: var(--warm-gold);
     color: var(--dark-brown);
     border: none;
-    padding: 10px 18px;
-    border-radius: 6px;
-    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
     text-decoration: none;
-    transition: background-color 0.2s ease;
+    display: inline-block;
 }
 
-.details-button:hover {
-    background-color: var(--warm-gold);
+.place-details, .place-info {
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 10px;
 }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
+/* Required Structure: Footer */
 footer {
-    background-color: var(--dark-brown);
-    color: var(--warm-beige);
     text-align: center;
     padding: 20px;
-    margin-top: auto;
-    font-size: 14px;
-}
-
-/* ==========================================================================
-   LOGO FIX (Removes the white box)
-   ========================================================================== */
-.transparent-header .logo,
-.solid-header .logo {
-    height: 60px;
-    background-color: transparent; /* Removed the white background */
-    border-radius: 0;
-    padding: 0;
-    box-shadow: none;
-    object-fit: contain;
-}
-
-/* ==========================================================================
-   STANDARD HEADER (For Login, Review, and Place Details pages)
-   ========================================================================== */
-.solid-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: var(--white);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-}
-
-.solid-header .center-nav a {
-    color: var(--dark-brown);
-    text-shadow: none;
-}
-
-.solid-header .login-button {
-    box-shadow: none;
-}
-
-/* ==========================================================================
-   FORM STYLES (Fixes the squished login page)
-   ========================================================================== */
-.form-container {
-    max-width: 450px;
-    margin: 60px auto;
-    background-color: var(--white);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-    border: 1px solid var(--warm-beige);
-}
-
-.form-container h2 {
-    color: var(--hbnb-burgundy);
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.8rem;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--dark-brown);
-    font-weight: 600;
-}
-
-.form-group input, 
-.form-group select, 
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--warm-beige);
-    border-radius: 8px;
-    font-size: 16px;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-.form-group input:focus, 
-.form-group select:focus, 
-.form-group textarea:focus {
-    border-color: var(--hbnb-burgundy);
-}
-
-.submit-btn {
-    width: 100%;
-    background-color: var(--hbnb-burgundy);
+    background-color: var(--dark-brown);
     color: var(--white);
-    padding: 14px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-}
-
-.submit-btn:hover {
-    background-color: var(--deep-burgundy);
+    margin-top: auto;
 }
