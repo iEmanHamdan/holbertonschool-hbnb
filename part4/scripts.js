@@ -156,15 +156,28 @@ function displayPlaces(places) {
     const container = document.getElementById('places-list');
     container.innerHTML = '';
 
-    places.forEach(place => {
+    // Array of your custom local images
+    const customImages = [
+        'images/fam1.png', 
+        'images/fam2.png', 
+        'images/kh1.png', 
+        'images/kh4.png', 
+        'images/kha3.png', 
+        'images/khe1.png'
+    ];
+
+    places.forEach((place, index) => {
         const card = document.createElement('article');
         card.className = 'place-card';
         card.dataset.price = place.price || 0;
 
+        // Cycles through your custom images based on the index
+        const imageUrl = customImages[index % customImages.length];
+
         card.innerHTML = `
+            <div class="place-card-image-placeholder" style="background-image: url('${imageUrl}')"></div>
             <h3>${place.title || place.name || 'Untitled Place'}</h3>
             <p class="price">$${place.price} / night</p>
-            <p style="margin-bottom: 12px; color: #666; font-size: 14px;">${place.description ? place.description.substring(0, 80) + '...' : ''}</p>
             <a href="place.html?id=${place.id}" class="details-button">View Details</a>
         `;
         container.appendChild(card);
