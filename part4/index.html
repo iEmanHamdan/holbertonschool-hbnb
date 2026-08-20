@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBnB - Mantu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="images/icon.png">
+</head>
+<body>
+
+    <header>
+        <a href="index.html">
+            <img src="images/HBnB-Logo.png" alt="HBnB Logo" class="logo">
+        </a>
+        <nav>
+            <a href="login.html" id="login-link" class="login-button">Login</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filter-section">
+            <label for="price-filter">Max Price Per Night:</label>
+            <select id="price-filter">
+                <option value="all">All</option>
+                <option value="10">$10</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+            </select>
+        </section>
+
+        <!-- Dynamic Places Container -->
+        <section id="places-list"></section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HBnB Mantu. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
