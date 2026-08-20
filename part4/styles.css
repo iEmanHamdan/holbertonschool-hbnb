@@ -39,12 +39,27 @@ body {
 }
 
 .nav-group a {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Adds perfect spacing between the icon and the text */
     text-decoration: none;
     color: var(--dark-brown);
     font-size: 13px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
+    transition: opacity 0.2s ease;
+}
+
+.nav-group a:hover {
+    opacity: 0.7; /* Adds a nice fade effect when hovering */
+}
+
+/* Styles the new custom icons */
+.nav-icon {
+    height: 18px; /* Keeps the icon proportional to your 13px text */
+    width: auto;
+    object-fit: contain;
 }
 
 .right-nav {
