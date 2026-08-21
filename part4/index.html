@@ -7,7 +7,72 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="images/icon.png">
 </head>
+
 <body>
+    <header class="editorial-header">
+        <div class="header-left">
+            <a href="index.html" class="logo-container">
+                <img src="images/HBnB-Logo.png" alt="Logo" class="logo">
+            </a>
+        </div>
+        <div class="header-middle">
+            <a href="index.html">
+                <img src="images/home-icon.png" alt="Home" class="nav-icon"> Home
+            </a>
+            <a href="#places-list">
+                <img src="images/place-icon.png" alt="Places" class="nav-icon"> Places
+            </a>
+        </div>
+        <div class="header-right">
+            <a href="login.html" class="signup-button">Sign Up</a>
+            <a href="login.html" id="login-link" class="login-button">Log In</a>
+        </div>
+    </header>
+
+    <!-- THE RESTORED 3D HERO SECTION -->
+    <section class="prestige-hero">
+        <h1 class="massive-text">HERITAGE</h1>
+        <img src="images/3dhb.png" alt="Mantu Tent" class="hero-3d-model">
+
+        <div class="hero-left-widget">
+            <div class="hero-image-card">
+                <div class="play-btn">▶</div>
+            </div>
+            <p>With deep cultural roots and diverse locations, we curate exceptional stays for the ambitious traveler.</p>
+            <div class="hero-stats">
+                <span>15 regions</span><br>
+                <span>80+ properties</span>
+            </div>
+        </div>
+
+        <div class="hero-right-widget">
+            <p>We curate accommodations that combine tradition, elegance, and modern comfort. Each Mantu stay balances authentic form and function.</p>
+            <a href="#places-list" class="explore-btn">EXPLORE MORE</a>
+        </div>
+    </section>
+
+    <main class="content-main">
+        <div class="filter-container">
+            <label for="price-filter">Filter by Price:</label>
+            <select id="price-filter">
+                <option value="All">All</option>
+                <option value="10">$10</option>
+                <option value="50">$50</option>
+                <option value="100">$100</option>
+            </select>
+        </div>
+
+        <section id="places-list">
+            <!-- JS will append .place-card elements here -->
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 HBnB Mantu. All rights reserved.</p>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
     <header class="editorial-header">
         <!-- 1. LEFT: Logo -->
         <div class="header-left">
